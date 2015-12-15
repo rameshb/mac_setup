@@ -133,6 +133,10 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew update && brew upgrade
 brew doctor
 
+# install the prereq
+brew install git
+brew install wget
+
 # homebrew taps
 brew tap caskroom/cask
 brew tap caskroom/versions
@@ -179,8 +183,6 @@ brew cask install spotify
 brew cask install telegram
 brew cask install shiftit
 brew cask install java
-brew install git
-brew install wget
 
 
 #####################################
@@ -204,7 +206,7 @@ pip install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0
 brew install node
 npm update npm -g
 # gulp for streaming build, forever for keep-alive
-sudo npm i -g gulp forever
+npm i -g gulp forever
 
 
 #####################################
@@ -226,7 +228,7 @@ brew install neo4j
 # when 9.5 is out of beta, just do brew install postgresql
 #####################################
 # set permission, install, link, init
-sudo chown -R $(whoami) /usr/local
+chown -R $(whoami) /usr/local
 brew tap petere/postgresql
 brew install petere/postgresql/postgresql-9.5
 brew link -f postgresql-9.5
