@@ -1,0 +1,257 @@
+#!/bin/sh
+
+#####################################
+# This script sets up your machine
+# Permission set to user readable & executable
+# by: chmod 775 ./setup
+# run by double clicking it
+#####################################
+
+
+#####################################
+# Preparing to run
+#####################################
+echo "
+==================
+Mac Setup
+by Wah Loon Keng
+@ Dec 15 2015
+==================
+"
+# Ask for the administrator password upfront
+sudo -v
+# Keep-alive: update existing `sudo` time stamp until this script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+
+
+#####################################
+# System Preference customization
+#####################################
+# Systems prefs, location at: ~/Library/Preferences
+# to read, e.g.:
+# defaults read com.apple.dock
+# reset if u fucked up:
+# defaults delete com.apple.dock; killall Dock
+
+
+#####################################
+# System-wide UI / Behavior
+#####################################
+# use dark menu bar and Dock
+defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
+
+# highlight color = red
+defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.733333 0.721569"
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+
+#####################################
+# Menu Bar
+#####################################
+# battery show percentage
+defaults write com.apple.menuextra.battery ShowPercent -string YES
+
+# clock show second
+defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm:ss a"
+
+
+#####################################
+# Trackpad, Mouse
+#####################################
+# enable tap-to-click everywhere
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# global mouse tracking speed (1...5)
+defaults write NSGlobalDomain com.apple.mouse.scaling -float 5
+# global trackpad tracking speed (1...5)
+defaults write NSGlobalDomain com.apple.trackpad.scaling -int 5
+
+# three finger drag
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
+
+
+#####################################
+# Keyboard
+#####################################
+# text: correct spelling automatically = 0
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Enable full keyboard access for all controls (eg enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+
+
+#####################################
+# Dock
+#####################################
+# move dock to left
+defaults write com.apple.dock pinning -string start
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+
+# show only active app icons in doc
+defaults write com.apple.dock static-only -bool true
+
+# adjusts size of app icons
+defaults write com.apple.dock tilesize -int 65
+
+
+#####################################
+# Kill affected applications
+#####################################
+for app in "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
+  killall "$app" > /dev/null 2>&1
+done
+
+echo "System Preferences customized. These may take a while to propagate."
+
+
+
+
+
+
+#####################################
+# Homebrew-install all shits
+#####################################
+
+#####################################
+# Set up Homebrew
+#####################################
+# Installs homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# upgrade and check
+brew update && brew upgrade
+brew doctor
+
+# homebrew taps
+brew tap caskroom/cask
+brew tap caskroom/versions
+brew tap caskroom/fonts
+
+# setup bash profile first before being overridden
+echo "# for Git" > /Users/$(whoami)/.bash_profile
+echo "export PATH=/usr/local/git/bin:\$PATH" >> /Users/$(whoami)/.bash_profile
+echo " " >> /Users/$(whoami)/.bash_profile
+echo "# TheFuck" >> /Users/$(whoami)/.bash_profile
+echo "alias fuck='eval \$(thefuck \$(fc -ln -1)); history -r'" >> /Users/$(whoami)/.bash_profile
+echo "# You can use whatever you want as an alias, like for Mondays:" >> /Users/$(whoami)/.bash_profile
+echo "alias FUCK='fuck'" >> /Users/$(whoami)/.bash_profile
+echo " " >> /Users/$(whoami)/.bash_profile
+echo "# git" >> /Users/$(whoami)/.bash_profile
+echo "alias gstat='git status'" >> /Users/$(whoami)/.bash_profile
+echo "alias gadd='git add -A; git commit -m'" >> /Users/$(whoami)/.bash_profile
+echo "alias gpush='git push'" >> /Users/$(whoami)/.bash_profile
+echo " " >> /Users/$(whoami)/.bash_profile
+echo " " >> /Users/$(whoami)/.bash_profile
+echo "# Terminal notifier" >> /Users/$(whoami)/.bash_profile
+echo "alias sayDone='terminal-notifier -title "Terminal" -message "Done " >> /Users/$(whoami)/.bash_profile2with echo "task!"; afplay /System/Library/Sounds/Glass.aiff'" >> /Users/$(whoami)/.bash_profile
+echo " " >> /Users/$(whoami)/.bash_profile
+echo "alias activatetf='source ~/tensorflow/bin/activate'" >> /Users/$(whoami)/.bash_profile
+echo "" >> /Users/$(whoami)/.bash_profile
+echo "# For neo4j to use JVM 1.8" >> /Users/$(whoami)/.bash_profile
+echo "export JAVA_HOME=\$(/usr/libexec/java_home)" >> /Users/$(whoami)/.bash_profile
+
+
+#####################################
+# Install common apps
+#####################################
+# Installs cask, really vital
+brew install caskroom/cask/brew-cask
+
+# Install the basic apps for work
+brew cask install google-chrome
+brew cask install lastpass
+brew cask install private-internet-access
+brew cask install sublime-text3
+brew cask install font-source-code-pro
+brew cask install slack
+brew cask install spotify
+brew cask install telegram
+brew cask install shiftit
+brew cask install java
+brew install git
+brew install wget
+
+
+#####################################
+# Install Python and pip apps
+#####################################
+# both version 2.x and 3.x
+brew install python
+brew install python3
+# update the shitty pip
+pip install --upgrade setuptools
+pip install --upgrade pip
+# thefuck for cmd correction, glances for sys activities, speedtest
+pip3 install thefuck glances speedtest-cli
+# tensorflow
+pip install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0.6.0-py2-none-any.whl
+
+
+#####################################
+# Install Node.js and npm apps
+#####################################
+brew install node
+npm update npm -g
+# gulp for streaming build, forever for keep-alive
+sudo npm i -g gulp forever
+
+
+#####################################
+# Install Ruby on Rails with RVM
+#####################################
+echo "gem: --no-document" >> ~/.gemrc
+curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+
+
+#####################################
+# Install Neo4j
+#####################################
+brew install neo4j
+
+
+#####################################
+# Install Postgresql 9.5 beta: 
+# !Takes a long time
+# when 9.5 is out of beta, just do brew install postgresql
+#####################################
+# set permission, install, link, init
+sudo chown -R $(whoami) /usr/local
+brew tap petere/postgresql
+brew install petere/postgresql/postgresql-9.5
+brew link -f postgresql-9.5
+initdb /usr/local/var/postgres -E utf8
+
+
+
+#####################################
+# Restoring custom Sublime config
+#####################################
+# clone ST config using the new token into destination
+git clone https://github.com/kengz/mac_setup.git /Users/$(whoami)/Documents/Sublime\ Text\ 3
+# delete default ST config
+rm -rf /Users/$(whoami)/Library/Application Support/Sublime\ Text\ 3
+# symlink the cloned ST config
+ln -s "/Users/$(whoami)/Documents/Sublime Text 3" "/Users/$(whoami)/Library/Application Support/"
+
+
+
+
+
+#####################################
+# All done. brew doctor to check all is proper
+#####################################
+
+echo "Apps installation done."
+brew doctor
+

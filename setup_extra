@@ -1,0 +1,41 @@
+#!/bin/sh
+
+#####################################
+# Extras
+# This script sets up the extra stuff apart from setup.sh
+# run by double clicking it
+#####################################
+
+
+#####################################
+# Preparing to run
+#####################################
+# Ask for the administrator password upfront
+sudo -v
+# Keep-alive: update existing `sudo` time stamp until this script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+#####################################
+# Install laTex basic (much smaller size)
+#####################################
+brew cask install basictex
+# need to refresh bash. Login to subshell to call these
+# install the issing latexmk for sublime text's latextool
+sh -c '
+sudo tlmgr update --self;
+sudo tlmgr install latexmk;
+exit $?;'
+# install skim for 2-way preview
+brew cask install skim
+
+
+#####################################
+# Install Octave. Takes a long time
+#####################################
+# octave
+brew tap homebrew/science
+brew install octave --without-java
+
+echo "Extras installation done."
+brew doctor
