@@ -238,7 +238,7 @@ initdb /usr/local/var/postgres -E utf8
 # Restoring custom Sublime config
 #####################################
 # clone ST config using the new token into destination
-git clone https://github.com/kengz/mac_setup.git /Users/$(whoami)/Documents/Sublime\ Text\ 3
+git clone https://github.com/kengz/sublime_settings.git /Users/$(whoami)/Documents/Sublime\ Text\ 3
 # delete default ST config
 rm -rf /Users/$(whoami)/Library/Application Support/Sublime\ Text\ 3
 # symlink the cloned ST config
