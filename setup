@@ -24,6 +24,8 @@ This will take about 30 minutes.
 "
 # Ask for the administrator password upfront
 sudo -v
+# prevent sleep for this script; & runs in background
+caffeinate -d &
 # Keep-alive: update existing `sudo` time stamp until this script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -138,11 +140,10 @@ These may take a while to propagate.
 echo "
 ================================================
 
-Installing via Homebrew
+Setup ~/.bash_profile
 
 ================================================
 "
-
 # setup bash profile first before being overridden
 echo "# for Git" > /Users/$(whoami)/.bash_profile
 echo "export PATH=/usr/local/git/bin:\$PATH" >> /Users/$(whoami)/.bash_profile
@@ -170,8 +171,12 @@ echo "export JAVA_HOME=\$(/usr/libexec/java_home)" >> /Users/$(whoami)/.bash_pro
 # Set up Homebrew
 #####################################
 echo "
+================================================
+
 Installing Homebrew.
 Hit return (Okay) when prompted to install command line tool
+
+================================================
 "
 # Installs homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -278,9 +283,6 @@ Restoring Sublime Text configs
 "
 # clone ST config using the new token into destination
 git clone https://github.com/kengz/sublime_settings.git /Users/$(whoami)/Documents/Sublime\ Text\ 3
-# remove n replace license
-rm ~/Documents/Sublime\ Text\ 3/Local/License.sublime_license
-mv /Users/$(whoami)/Library/Application\ Support/Sublime\ Text\ 3/Local/License.sublime_license ~/Documents/Sublime\ Text\ 3/Local/
 # delete default ST config
 rm -rf /Users/$(whoami)/Library/Application\ Support/Sublime\ Text\ 3/
 # symlink the cloned ST config
