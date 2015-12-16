@@ -156,11 +156,9 @@ echo "# git" >> /Users/$(whoami)/.bash_profile
 echo "alias gstat='git status'" >> /Users/$(whoami)/.bash_profile
 echo "alias gadd='git add -A; git commit -m'" >> /Users/$(whoami)/.bash_profile
 echo "alias gpush='git push'" >> /Users/$(whoami)/.bash_profile
+echo "alias gpull='git pull'" >> /Users/$(whoami)/.bash_profile
 echo " " >> /Users/$(whoami)/.bash_profile
-echo " " >> /Users/$(whoami)/.bash_profile
-echo "# Terminal notifier" >> /Users/$(whoami)/.bash_profile
-echo "alias sayDone='terminal-notifier -title "Terminal" -message "Done " >> /Users/$(whoami)/.bash_profile2with echo "task!"; afplay /System/Library/Sounds/Glass.aiff'" >> /Users/$(whoami)/.bash_profile
-echo " " >> /Users/$(whoami)/.bash_profile
+echo "# activate tensorflow" >> /Users/$(whoami)/.bash_profile
 echo "alias activatetf='source ~/tensorflow/bin/activate'" >> /Users/$(whoami)/.bash_profile
 echo "" >> /Users/$(whoami)/.bash_profile
 echo "# For neo4j to use JVM 1.8" >> /Users/$(whoami)/.bash_profile
