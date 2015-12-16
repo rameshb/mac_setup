@@ -102,7 +102,6 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 # Dock
 #####################################
 # move dock to left
-# defaults write com.apple.dock pinning -string start
 defaults write com.apple.dock orientation -string left
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock minimize-to-application -bool true
