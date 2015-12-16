@@ -18,6 +18,8 @@ Welcome to the Mac Setup
 by Wah Loon Keng @ Dec 15 2015
 for bug reports, contact [ kengzwl@gmail.com ]
 
+This will take about 30 minutes.
+
 ================================================
 "
 # Ask for the administrator password upfront
@@ -167,14 +169,13 @@ echo "export JAVA_HOME=\$(/usr/libexec/java_home)" >> /Users/$(whoami)/.bash_pro
 #####################################
 # Set up Homebrew
 #####################################
+echo "
+Installing Homebrew.
+Hit return (Okay) when prompted to install command line tool
+"
 # Installs homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Install command line tool
-echo "
-Hit return (Okay) when prompted to install command line tool
-"
-xcode-select --install
 
 # upgrade and check
 brew update && brew upgrade
@@ -208,6 +209,11 @@ brew cask install telegram
 brew cask install shiftit
 brew cask install java
 
+#####################################
+# Run the binary to install
+#####################################
+open -a Google\ Chrome
+open /opt/homebrew-cask/Caskroom/lastpass/latest/Lastpass\ Installer.app
 
 #####################################
 # Install Python and pip apps
@@ -272,10 +278,11 @@ Restoring Sublime Text configs
 "
 # clone ST config using the new token into destination
 git clone https://github.com/kengz/sublime_settings.git /Users/$(whoami)/Documents/Sublime\ Text\ 3
-# move n replace license
-mv /Users/$(whoami)/Library/Application Support/Sublime\ Text\ 3/Local/License.sublime_license ~/Documents/Sublime\ Text\ 3/Local/
+# remove n replace license
+rm ~/Documents/Sublime\ Text\ 3/Local/License.sublime_license
+mv /Users/$(whoami)/Library/Application\ Support/Sublime\ Text\ 3/Local/License.sublime_license ~/Documents/Sublime\ Text\ 3/Local/
 # delete default ST config
-rm -rf /Users/$(whoami)/Library/Application Support/Sublime\ Text\ 3/
+rm -rf /Users/$(whoami)/Library/Application\ Support/Sublime\ Text\ 3/
 # symlink the cloned ST config
 ln -s "/Users/$(whoami)/Documents/Sublime Text 3" "/Users/$(whoami)/Library/Application Support/"
 
@@ -292,6 +299,7 @@ echo "
 ================================================
 
 Setup is done.
+Restart your machine for changes to apply.
 
 ================================================
 "
