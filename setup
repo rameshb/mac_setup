@@ -65,11 +65,9 @@ defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm:ss 
 #####################################
 # enable tap-to-click everywhere
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# global mouse tracking speed (1...5)
-defaults write NSGlobalDomain com.apple.mouse.scaling -float 5
 # global trackpad tracking speed (1...5)
 defaults write NSGlobalDomain com.apple.trackpad.scaling -int 5
 
@@ -82,10 +80,9 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
 #####################################
 # text: correct spelling automatically = 0
 defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Enable full keyboard access for all controls (eg enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 
 
@@ -93,7 +90,8 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Dock
 #####################################
 # move dock to left
-defaults write com.apple.dock pinning -string start
+# defaults write com.apple.dock pinning -string start
+defaults write com.apple.dock orientation -string left
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock minimize-to-application -bool true
 defaults write com.apple.dock showAppExposeGestureEnabled -bool true
@@ -123,25 +121,6 @@ echo "System Preferences customized. These may take a while to propagate."
 # Homebrew-install all shits
 #####################################
 
-#####################################
-# Set up Homebrew
-#####################################
-# Installs homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-# upgrade and check
-brew update && brew upgrade
-brew doctor
-
-# install the prereq
-brew install git
-brew install wget
-
-# homebrew taps
-brew tap caskroom/cask
-brew tap caskroom/versions
-brew tap caskroom/fonts
-
 # setup bash profile first before being overridden
 echo "# for Git" > /Users/$(whoami)/.bash_profile
 echo "export PATH=/usr/local/git/bin:\$PATH" >> /Users/$(whoami)/.bash_profile
@@ -164,6 +143,31 @@ echo "alias activatetf='source ~/tensorflow/bin/activate'" >> /Users/$(whoami)/.
 echo "" >> /Users/$(whoami)/.bash_profile
 echo "# For neo4j to use JVM 1.8" >> /Users/$(whoami)/.bash_profile
 echo "export JAVA_HOME=\$(/usr/libexec/java_home)" >> /Users/$(whoami)/.bash_profile
+
+#####################################
+# Set up Homebrew
+#####################################
+# Installs homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install command line tool
+echo "
+Hit return (Okay) when prompted to install command line tool
+"
+xcode-select --install
+
+# upgrade and check
+brew update && brew upgrade
+brew doctor
+
+# install the prereq
+brew install git
+brew install wget
+
+# homebrew taps
+brew tap caskroom/cask
+brew tap caskroom/versions
+brew tap caskroom/fonts
 
 
 #####################################
@@ -228,7 +232,7 @@ brew install neo4j
 # when 9.5 is out of beta, just do brew install postgresql
 #####################################
 # set permission, install, link, init
-chown -R $(whoami) /usr/local
+sudo chown -R $(whoami) /usr/local
 brew tap petere/postgresql
 brew install petere/postgresql/postgresql-9.5
 brew link -f postgresql-9.5
