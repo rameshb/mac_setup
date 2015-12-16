@@ -232,7 +232,7 @@ brew install neo4j
 # when 9.5 is out of beta, just do brew install postgresql
 #####################################
 # set permission, install, link, init
-sudo chown -R $(whoami) /usr/local
+chown -R $(whoami) /usr/local
 brew tap petere/postgresql
 brew install petere/postgresql/postgresql-9.5
 brew link -f postgresql-9.5
@@ -245,8 +245,10 @@ initdb /usr/local/var/postgres -E utf8
 #####################################
 # clone ST config using the new token into destination
 git clone https://github.com/kengz/sublime_settings.git /Users/$(whoami)/Documents/Sublime\ Text\ 3
+# move n replace license
+mv /Users/$(whoami)/Library/Application Support/Sublime\ Text\ 3/Local/License.sublime_license ~/Documents/Sublime\ Text\ 3/Local/
 # delete default ST config
-rm -rf /Users/$(whoami)/Library/Application Support/Sublime\ Text\ 3
+rm -rf /Users/$(whoami)/Library/Application Support/Sublime\ Text\ 3/
 # symlink the cloned ST config
 ln -s "/Users/$(whoami)/Documents/Sublime Text 3" "/Users/$(whoami)/Library/Application Support/"
 
