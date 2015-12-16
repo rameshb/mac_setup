@@ -4,7 +4,7 @@
 # This script sets up your machine
 # Permission set to user readable & executable
 # by: chmod 775 ./setup
-# run by double clicking it
+# run by right-clicking it
 #####################################
 
 
@@ -12,11 +12,13 @@
 # Preparing to run
 #####################################
 echo "
-==================
-Mac Setup
-by Wah Loon Keng
-@ Dec 15 2015
-==================
+================================================
+
+Welcome to the Mac Setup
+by Wah Loon Keng @ Dec 15 2015
+for bug reports, contact [ keng@eligible.com ]
+
+================================================
 "
 # Ask for the administrator password upfront
 sudo -v
@@ -34,7 +36,13 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # defaults read com.apple.dock
 # reset if u fucked up:
 # defaults delete com.apple.dock; killall Dock
+echo "
+================================================
 
+Customizing System Preferences
+
+================================================
+"
 
 #####################################
 # System-wide UI / Behavior
@@ -110,9 +118,14 @@ for app in "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
   killall "$app" > /dev/null 2>&1
 done
 
-echo "System Preferences customized. These may take a while to propagate."
+echo "
+================================================
 
+System Preferences customized. 
+These may take a while to propagate.
 
+================================================
+"
 
 
 
@@ -120,6 +133,13 @@ echo "System Preferences customized. These may take a while to propagate."
 #####################################
 # Homebrew-install all shits
 #####################################
+echo "
+================================================
+
+Installing via Homebrew
+
+================================================
+"
 
 # setup bash profile first before being overridden
 echo "# for Git" > /Users/$(whoami)/.bash_profile
@@ -243,6 +263,13 @@ initdb /usr/local/var/postgres -E utf8
 #####################################
 # Restoring custom Sublime config
 #####################################
+echo "
+================================================
+
+Restoring Sublime Text configs
+
+================================================
+"
 # clone ST config using the new token into destination
 git clone https://github.com/kengz/sublime_settings.git /Users/$(whoami)/Documents/Sublime\ Text\ 3
 # move n replace license
@@ -260,6 +287,13 @@ ln -s "/Users/$(whoami)/Documents/Sublime Text 3" "/Users/$(whoami)/Library/Appl
 # All done. brew doctor to check all is proper
 #####################################
 
-echo "Apps installation done."
 brew doctor
+echo "
+================================================
+
+Setup is done.
+
+================================================
+"
+exit $?;
 
