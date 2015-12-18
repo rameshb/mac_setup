@@ -203,6 +203,7 @@ brew install caskroom/cask/brew-cask
 brew cask install google-chrome
 brew cask install lastpass
 brew cask install private-internet-access
+brew cask install tunnelblick
 brew cask install sublime-text3
 brew cask install font-source-code-pro
 brew cask install slack
