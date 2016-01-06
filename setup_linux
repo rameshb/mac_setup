@@ -1,0 +1,176 @@
+#!/bin/bash
+
+#####################################
+# This script sets up your machine
+# Permission set to user readable & executable
+# by: chmod 775 ./setup_linux
+# run by right-clicking it
+#####################################
+
+
+#####################################
+# Preparing to run
+#####################################
+echo "
+================================================
+
+Welcome to the Linux Setup
+by Wah Loon Keng @ Jan 6 2016
+for bug reports, contact [ kengzwl@gmail.com ]
+
+This will take under 30 minutes.
+
+================================================
+"
+# Ask for the administrator password upfront
+sudo -v
+# Keep-alive: update existing `sudo` time stamp until this script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+
+#####################################
+# Homebrew-install all shits
+#####################################
+echo "
+================================================
+
+Setup ~/.bash_profile
+
+================================================
+"
+# setup bash profile first before being overridden
+echo "
+# git
+alias gstat='git status'
+alias gadd='git add -A; git commit -m'
+alias gpush='git push'
+alias gpull='git pull'
+ 
+# activate tensorflow
+alias activatetf='source ~/tensorflow/bin/activate'
+
+# lazy-check your ip
+alias myip='curl ipinfo.io'
+
+# lazy login to NUC
+alias nuc='ssh -X deploy@212.47.252.178 -p 377'
+
+" > ~/.bash_profile
+
+
+
+#####################################
+# Set up Homebrew
+#####################################
+echo "
+=> Ensuring you have brew"
+brew --version || (ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)";
+
+# export brew path
+echo '
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+' >> ~/.bash_profile;
+)
+
+
+
+# Add keys
+# Google-chrome
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+# ST3
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+
+
+# Update first before install
+sudo apt-get update 
+
+
+#####################################
+# Install common apps
+#####################################
+sudo apt-get install git
+sudo apt-get install google-chrome-stable
+sudo apt-get install sublime-text-installer
+
+
+# install java
+echo "
+=> Ensuring you have JDK 1.7 to run neo4j"
+sudo apt-get update
+java -version || sudo apt-get install default-jdk
+
+# write JAVA_HOME path if not exists
+if [ "$JAVA_HOME" == "" ]; 
+	then jdkpath=$(readlink -f $(which java) | sed 's/\(.*\)\/bin\/java/\1/'); echo "
+	# For neo4j to use JVM
+	export JAVA_HOME=$jdkpath
+	" >> ~/.bash_profile;
+fi
+
+
+
+# install neo4j for brain
+echo "
+=> Ensuring you have neo4j"
+ninfo=$(brew info neo4j)
+nv="$(echo $ninfo | sed 's/\(.*\)\, dev.*/\1/')"
+if [ "$nv" ]; then echo $nv; else (
+	sudo wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -;
+	echo 'deb http://debian.neo4j.org/repo stable/' >/tmp/neo4j.list;
+	sudo mv /tmp/neo4j.list /etc/apt/sources.list.d;
+	sudo apt-get update;
+	sudo apt-get install neo4j;
+	echo "
+
+# neo4j {start | stop | status | info}
+alias neo4j='service neo4j-service'
+" >> ~/.bash_profile
+	); fi
+
+
+
+#####################################
+# Install Python and pip apps
+#####################################
+sudo apt-get install python-pip python-dev build-essential
+sudo pip install --upgrade pip
+sudo pip install --upgrade setuptools
+sudo pip install --upgrade virtualenv
+# tensorflow
+sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.6.0-cp27-none-linux_x86_64.whl
+
+
+
+#####################################
+# Install Node.js and npm apps
+#####################################
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo npm update npm -g
+# gulp for streaming build, forever for keep-alive
+sudo npm i -g gulp forever
+
+
+
+#####################################
+# Install Ruby on Rails with RVM
+#####################################
+echo "gem: --no-document" >> ~/.gemrc
+curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+
+
+echo "
+================================================
+
+Setup is done.
+Restart your machine for changes to apply.
+
+================================================
+"
+
+
