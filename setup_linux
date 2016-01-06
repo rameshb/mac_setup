@@ -121,9 +121,9 @@ java -version || sudo apt-get install default-jdk
 # write JAVA_HOME path if not exists
 if [ "$JAVA_HOME" == "" ]; 
 	then jdkpath=$(readlink -f $(which java) | sed 's/\(.*\)\/bin\/java/\1/'); echo "
-	# For neo4j to use JVM
-	export JAVA_HOME=$jdkpath
-	" >> ~/.bash_profile;
+# For neo4j to use JVM
+export JAVA_HOME=$jdkpath
+" >> ~/.bash_profile;
 fi
 
 
@@ -169,6 +169,10 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm update npm -g
 # gulp for streaming build, forever for keep-alive
 sudo npm i -g gulp forever
+
+
+# load user's shits in .bash_profile in all terminal
+echo "source ~/.bash_profile" >> ~/.bashrc
 
 
 echo "
