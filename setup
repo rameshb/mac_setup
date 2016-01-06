@@ -18,7 +18,7 @@ Welcome to the Mac Setup
 by Wah Loon Keng @ Dec 15 2015
 for bug reports, contact [ kengzwl@gmail.com ]
 
-This will take about 30 minutes.
+This will take under 30 minutes.
 
 ================================================
 "
@@ -144,25 +144,34 @@ Setup ~/.bash_profile
 ================================================
 "
 # setup bash profile first before being overridden
-echo "# for Git" > /Users/$(whoami)/.bash_profile
-echo "export PATH=/usr/local/git/bin:\$PATH" >> /Users/$(whoami)/.bash_profile
-echo " " >> /Users/$(whoami)/.bash_profile
-echo "# TheFuck" >> /Users/$(whoami)/.bash_profile
-echo "alias fuck='eval \$(thefuck \$(fc -ln -1)); history -r'" >> /Users/$(whoami)/.bash_profile
-echo "# You can use whatever you want as an alias, like for Mondays:" >> /Users/$(whoami)/.bash_profile
-echo "alias FUCK='fuck'" >> /Users/$(whoami)/.bash_profile
-echo " " >> /Users/$(whoami)/.bash_profile
-echo "# git" >> /Users/$(whoami)/.bash_profile
-echo "alias gstat='git status'" >> /Users/$(whoami)/.bash_profile
-echo "alias gadd='git add -A; git commit -m'" >> /Users/$(whoami)/.bash_profile
-echo "alias gpush='git push'" >> /Users/$(whoami)/.bash_profile
-echo "alias gpull='git pull'" >> /Users/$(whoami)/.bash_profile
-echo " " >> /Users/$(whoami)/.bash_profile
-echo "# activate tensorflow" >> /Users/$(whoami)/.bash_profile
-echo "alias activatetf='source ~/tensorflow/bin/activate'" >> /Users/$(whoami)/.bash_profile
-echo "" >> /Users/$(whoami)/.bash_profile
-echo "# For neo4j to use JVM 1.8" >> /Users/$(whoami)/.bash_profile
-echo "export JAVA_HOME=\$(/usr/libexec/java_home)" >> /Users/$(whoami)/.bash_profile
+echo "
+# for Git
+export PATH=/usr/local/git/bin:\$PATH
+ 
+# TheFuck
+alias fuck='eval \$(thefuck \$(fc -ln -1)); history -r'
+# You can use whatever you want as an alias, like for Mondays:
+alias FUCK='fuck'
+ 
+# git
+alias gstat='git status'
+alias gadd='git add -A; git commit -m'
+alias gpush='git push'
+alias gpull='git pull'
+ 
+# activate tensorflow
+alias activatetf='source ~/tensorflow/bin/activate'
+
+# For neo4j to use JVM 1.8
+export JAVA_HOME=\$(/usr/libexec/java_home)
+
+# lazy-check your ip
+alias myip='curl ipinfo.io'
+
+# lazy login to NUC
+alias nuc='ssh -X deploy@212.47.252.178 -p 377'
+
+" > ~/.bash_profile
 
 #####################################
 # Set up Homebrew
