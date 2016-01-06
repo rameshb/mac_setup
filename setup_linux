@@ -63,8 +63,16 @@ alias nuc='ssh -X deploy@212.47.252.178 -p 377'
 #####################################
 # Install Ruby on Rails with RVM
 #####################################
-echo "gem: --no-document" >> ~/.gemrc
-curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+gpg --keyserver hkp://keys.gnupg.net --recv-keys  409B6B1796C275462A1703113804BB82D39DC0E3
+sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+curl -L https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install 2.2.3
+rvm use 2.2.3 --default
+ruby -v
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+gem install bundler
+
 
 
 #####################################

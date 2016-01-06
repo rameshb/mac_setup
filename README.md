@@ -1,5 +1,5 @@
 # Mac Setup
-Setup for new macs in case of an EMP attack. Installs: systems, installations, dotfiles, Sublime Text 3. Run shell via a click.
+Setup for new Macs or Linux machines in case of an EMP attack. Installs: systems, installations, dotfiles, Sublime Text 3. Run shell via a click.
 
 
 ## Instructions
