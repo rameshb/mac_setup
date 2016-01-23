@@ -23,7 +23,8 @@ This will take under 30 minutes.
 ================================================
 "
 # Ask for the administrator password upfront
-sudo -v
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+# sudo -v
 # prevent sleep for this script; & runs in background
 caffeinate -d &
 # Keep-alive: update existing `sudo` time stamp until this script has finished
@@ -210,7 +211,7 @@ brew install caskroom/cask/brew-cask
 
 # Install the basic apps for work
 brew cask install google-chrome
-brew cask install lastpass
+brew cask install 1password
 brew cask install tunnelblick
 brew cask install sublime-text3
 brew cask install font-source-code-pro
@@ -220,15 +221,16 @@ brew cask install shiftit
 brew cask install java
 
 # download the vpn configs for tunnelblick
-curl -o ~/Downloads https://www.privateinternetaccess.com/openvpn/openvpn.zip
-unzip ~/Downloads/openvpn.zip ~/Downloads/openvpn
+curl -o ~/Downloads/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip
+unzip ~/Downloads/openvpn.zip -d ~/Downloads/openvpn/
 rm ~/Downloads/openvpn.zip
 
 #####################################
-# Run the binary to install
+# Run the binary to install ext
 #####################################
 open -a Google\ Chrome
-open /opt/homebrew-cask/Caskroom/lastpass/latest/Lastpass\ Installer.app
+open -a Safari
+open -a 1Password\ 6
 
 #####################################
 # Install Python and pip apps
