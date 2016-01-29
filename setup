@@ -263,6 +263,8 @@ npm i -g gulp forever
 echo "gem: --no-document" >> ~/.gemrc
 curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
 
+# install travis for encryption
+gem install travis
 
 #####################################
 # Install Neo4j

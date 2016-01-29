@@ -74,6 +74,9 @@ ruby -v
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler
 
+# install travis for encryption
+gem install travis
+
 
 
 #####################################
