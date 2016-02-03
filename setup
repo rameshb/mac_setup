@@ -258,10 +258,20 @@ npm i -g gulp forever
 
 
 #####################################
-# Install Ruby on Rails with RVM
+# Install Ruby on Rails with rbenv
 #####################################
 echo "gem: --no-document" >> ~/.gemrc
-curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+brew install rbenv ruby-build
+echo '# for rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+' >> ~/.bash_profile
+source ~/.bash_profile
+rbenv install $(rbenv install -l | grep -v - | tail -1)
+rbenv global $(rbenv install -l | grep -v - | tail -1)
+gem install bundler
+gem install rails
+rbenv rehash
 
 # install travis for encryption
 gem install travis
