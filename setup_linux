@@ -36,7 +36,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 echo "
 ================================================
 
-Setup ~/.bash_profile
+Setup ~/.bashrc
 
 ================================================
 "
@@ -56,8 +56,7 @@ alias myip='curl ipinfo.io'
 
 # lazy login to NUC
 alias nuc='ssh -X deploy@212.47.252.178 -p 377'
-
-" > ~/.bash_profile
+" > ~/.bashrc
 
 
 # Update first before install
@@ -75,8 +74,7 @@ brew --version || (ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homeb
 echo '
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-' >> ~/.bash_profile;
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"' >> ~/.bashrc;
 )
 
 
@@ -107,8 +105,7 @@ java -version || sudo apt-get install default-jdk
 if [ "$JAVA_HOME" == "" ]; 
 	then jdkpath=$(readlink -f $(which java) | sed 's/\(.*\)\/bin\/java/\1/'); echo "
 # For neo4j to use JVM
-export JAVA_HOME=$jdkpath
-" >> ~/.bash_profile;
+export JAVA_HOME=$jdkpath" >> ~/.bashrc;
 fi
 
 
@@ -125,10 +122,8 @@ if [ "$nv" ]; then echo $nv; else (
 	sudo apt-get update;
 	sudo apt-get install neo4j;
 	echo "
-
 # neo4j {start | stop | status | info}
-alias neo4j='service neo4j-service'
-" >> ~/.bash_profile
+alias neo4j='service neo4j-service'" >> ~/.bashrc
 	); fi
 
 
@@ -186,9 +181,6 @@ rbenv rehash
 gem install travis
 
 
-
-# load user's shits in .bash_profile in all terminal
-echo "source ~/.bash_profile" >> ~/.bashrc
 
 
 echo "
