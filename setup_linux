@@ -31,7 +31,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
 #####################################
-# Homebrew-install all shits
+# install all shits
 #####################################
 echo "
 ================================================
@@ -61,44 +61,40 @@ alias nuc='ssh -X deploy@212.47.252.178 -p 377'
 
 # Update first before install
 sudo apt-get update 
+sudo apt-get install ruby
 
 
 #####################################
-# Set up Homebrew
-#####################################
-echo "
-=> Ensuring you have brew"
-brew --version || (ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)";
-
-# export brew path
-echo '
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"' >> ~/.bashrc;
-)
-
-
 # Add keys
+#####################################
 # Google-chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 # ST3
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
+# neo4j
+sudo wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -;
+echo 'deb http://debian.neo4j.org/repo stable/' >/tmp/neo4j.list;
+sudo mv /tmp/neo4j.list /etc/apt/sources.list.d;
+# postgres 9.5
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
 
+# then update
+sudo apt-get update
 
 
 #####################################
 # Install common apps
 #####################################
+sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
 sudo apt-get install git
 sudo apt-get install google-chrome-stable
 sudo apt-get install sublime-text-installer
 
-
 # install java
 echo "
 => Ensuring you have JDK 1.7 to run neo4j"
-sudo apt-get update
 java -version || sudo apt-get install default-jdk
 
 # write JAVA_HOME path if not exists
@@ -107,24 +103,6 @@ if [ "$JAVA_HOME" == "" ];
 # For neo4j to use JVM
 export JAVA_HOME=$jdkpath" >> ~/.bashrc;
 fi
-
-
-
-# install neo4j for brain
-echo "
-=> Ensuring you have neo4j"
-ninfo=$(brew info neo4j)
-nv="$(echo $ninfo | sed 's/\(.*\)\, dev.*/\1/')"
-if [ "$nv" ]; then echo $nv; else (
-	sudo wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -;
-	echo 'deb http://debian.neo4j.org/repo stable/' >/tmp/neo4j.list;
-	sudo mv /tmp/neo4j.list /etc/apt/sources.list.d;
-	sudo apt-get update;
-	sudo apt-get install neo4j;
-	echo "
-# neo4j {start | stop | status | info}
-alias neo4j='service neo4j-service'" >> ~/.bashrc
-	); fi
 
 
 
@@ -153,14 +131,13 @@ sudo npm i -g gulp forever
 
 
 #####################################
-# Install Ruby on Rails with RVM
+# Install Ruby on Rails with rbenv
 #####################################
-sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
-
 # install rbenv ruby-build
 cd
 git clone git://github.com/sstephenson/rbenv.git .rbenv
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo '
+export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 exec $SHELL
 
@@ -180,6 +157,35 @@ rbenv rehash
 # install travis for encryption
 gem install travis
 
+
+#####################################
+# Install Neo4j
+#####################################
+sudo apt-get install neo4j;
+echo "
+# neo4j {start | stop | status | info}
+alias neo4j='service neo4j-service'" >> ~/.bashrc
+
+
+#####################################
+# Install Postgresql 9.5: 
+#####################################
+sudo apt-get install postgresql postgresql-contrib
+
+
+#####################################
+# Setup Amazon EC2 CLI
+#####################################
+curl -O http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
+sudo mkdir /usr/local/ec2
+sudo unzip ec2-api-tools.zip -d /usr/local/ec2
+export EC2_HOME=/usr/local/ec2/$(ls /usr/local/ec2)
+export PATH=$PATH:$EC2_HOME/bin
+
+# Then manually export your EC2 instance cred
+# more ref here http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/set-up-ec2-cli-linux.html#setting_up_ec2_command_linux
+# export AWS_ACCESS_KEY=your-aws-access-key-id 
+# export AWS_SECRET_KEY=your-aws-secret-key
 
 
 
