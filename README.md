@@ -7,10 +7,10 @@ Setup for new Macs or Linux machines in case of an EMP attack. Installs: systems
 ### Linux
 ```shell
 cd
+sudo apt-get install zip unzip
 curl -LOk https://github.com/kengz/mac_setup/archive/master.zip
 unzip master.zip
-cd mac_setup
-bash setup_linux
+bash mac_setup-master/setup_linux
 ```
 
 ### MacOS
@@ -18,8 +18,7 @@ bash setup_linux
 cd
 curl -LOk https://github.com/kengz/mac_setup/archive/master.zip
 unzip master.zip
-cd mac_setup
-bash setup
+bash mac_setup-master/setup
 ```
 
 Or if you like GUI, download the executable `setup` and **RIGHT-CLICK** on it to run. 
