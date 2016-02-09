@@ -6,12 +6,12 @@ Setup for new machines, MacOS or Ubuntu, in case of an EMP attack. Installs: sys
 
 ### Linux
 ```shell
-cd && sudo apt-get install zip unzip && curl -LOk https://github.com/kengz/mac_setup/archive/master.zip && unzip master.zip -d ~/mac_setup && bash ~/mac_setup/setup && rm -rf mac_setup && rm master.zip
+cd && sudo apt-get install zip unzip && curl -LOk https://github.com/kengz/mac_setup/archive/master.zip && unzip master.zip -d ~/mac_setup && bash ~/mac_setup/setup && rm -rf ~/mac_setup && rm ~/master.zip
 ```
 
 ### MacOS
 ```shell
-cd && curl -LOk https://github.com/kengz/mac_setup/archive/master.zip && unzip master.zip -d ~/mac_setup && bash ~/mac_setup/setup && rm -rf mac_setup && rm master.zip
+cd && curl -LOk https://github.com/kengz/mac_setup/archive/master.zip && unzip master.zip -d ~/mac_setup && bash ~/mac_setup/setup && rm -rf ~/mac_setup && rm ~/master.zip
 ```
 
 Or if you don't like the terminal, download the executable `setup` and **RIGHT-CLICK** on it to run. 
