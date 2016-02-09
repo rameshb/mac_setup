@@ -76,6 +76,7 @@ sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libread
 sudo apt-get install git
 sudo apt-get install google-chrome-stable
 sudo apt-get install sublime-text-installer
+sudo apt-get install screen
 
 # install java
 echo "
