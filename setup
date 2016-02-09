@@ -23,9 +23,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 if [ $(uname) == "Darwin" ];
 # Mac runs below
 then (
-	bash ~/mac_setup/setup_macOS;
+	bash mac_setup/setup_macOS;
 	);
 else (
-	bash ~/mac_setup/setup_ubuntu;
+	bash mac_setup/setup_ubuntu;
 	);
 fi
