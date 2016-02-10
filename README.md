@@ -4,7 +4,7 @@ Setup for new machines, MacOS or Ubuntu, in case of an EMP attack. Installs: sys
 
 ## Instructions
 
-### Linux
+### Ubuntu
 ```shell
 cd && sudo apt-get install zip unzip && curl -LOk https://github.com/kengz/mac_setup/archive/master.zip && unzip master.zip && mv mac_setup-master mac_setup && bash mac_setup/setup
 ```
@@ -14,7 +14,7 @@ cd && sudo apt-get install zip unzip && curl -LOk https://github.com/kengz/mac_s
 cd && curl -LOk https://github.com/kengz/mac_setup/archive/master.zip && unzip master.zip && mv mac_setup-master mac_setup && bash mac_setup/setup
 ```
 
-Or if you don't like the terminal, download the executable `setup` and **RIGHT-CLICK** on it to run. 
+Or if you don't like the terminal, download the zip and **RIGHT-CLICK** on `setup` to run. 
 
 The `setup_macOS` will download the [Sublime Settings](https://github.com/kengz/sublime_settings) repo to `~/Documents/` for you to setup Sublime too.
 

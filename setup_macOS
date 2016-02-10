@@ -218,17 +218,17 @@ open -a 1Password\ 6
 # Install Python and pip apps
 #####################################
 # both version 2.x and 3.x
-brew install python
 brew install python3
 # update the shitty pip
-pip install --upgrade setuptools
-pip install --upgrade pip
-# thefuck for cmd correction, glances for sys activities, speedtest
+pip3 install --upgrade setuptools
+pip3 install --upgrade virtualenvwrapper
+echo "
+# python3 virtualenvwrapper
+source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bash_profile
 pip3 install thefuck glances speedtest-cli
 # tensorflow
-easy_install --upgrade six
-pip install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0.6.0-py2-none-any.whl
-
+sudo easy_install --upgrade six
+sudo pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0.6.0-py3-none-any.whl
 
 #####################################
 # Install Node.js and npm apps
