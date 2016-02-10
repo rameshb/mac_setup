@@ -179,6 +179,17 @@ export PATH=$PATH:$EC2_HOME/bin
 
 rm -rf mac_setup master.zip ec2-api-tools.zip
 
+
+#####################################
+# Set your swap file bigger
+#####################################
+swapoff -a
+sudo dd if=/dev/zero of=/swapfile bs=1024 count=1024k
+sudo mkswap /swapfile
+sudo swapon /swapfile
+swapon -s
+
+
 echo "
 ================================================
 
