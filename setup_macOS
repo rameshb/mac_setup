@@ -222,8 +222,11 @@ brew install python3
 # update the shitty pip
 pip3 install --upgrade setuptools
 pip3 install --upgrade virtualenvwrapper
+mkdir ~/.virtualenvs
 echo "
 # python3 virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
 source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bash_profile
 pip3 install thefuck glances speedtest-cli
 # tensorflow
@@ -238,24 +241,6 @@ npm update npm -g
 # gulp for streaming build, forever for keep-alive
 npm i -g gulp forever
 
-
-#####################################
-# Install Ruby on Rails with rbenv
-#####################################
-echo "gem: --no-document" >> ~/.gemrc
-brew install rbenv ruby-build
-echo '
-# for rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
-source ~/.bash_profile
-rbenv install $(rbenv install -l | grep -v - | tail -1)
-rbenv global $(rbenv install -l | grep -v - | tail -1)
-gem install bundler
-gem install rails
-rbenv rehash
-
-# install travis for encryption
-gem install travis
 
 
 #####################################
@@ -317,6 +302,24 @@ rm -rf /Users/$(whoami)/Library/Application\ Support/Sublime\ Text\ 3/
 ln -s "/Users/$(whoami)/Documents/Sublime Text 3" "/Users/$(whoami)/Library/Application Support/"
 
 
+
+#####################################
+# Install Ruby on Rails with rbenv
+#####################################
+echo "gem: --no-document" >> ~/.gemrc
+brew install rbenv ruby-build
+echo '
+# for rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
+source ~/.bash_profile
+rbenv install --verbose $(rbenv install -l | grep -v - | tail -1)
+rbenv global --verbose $(rbenv install -l | grep -v - | tail -1)
+gem install bundler
+gem install rails
+rbenv rehash
+
+# install travis for encryption
+gem install travis
 
 
 
