@@ -154,8 +154,7 @@ alias activatetf='source ~/tensorflow/bin/activate'
 export JAVA_HOME=\$(/usr/libexec/java_home)
 
 # lazy-check your ip
-alias myip='curl ipinfo.io'
-" > ~/.bash_profile
+alias myip='curl ipinfo.io'" > ~/.bash_profile
 
 #####################################
 # Set up Homebrew
@@ -245,7 +244,8 @@ npm i -g gulp forever
 #####################################
 echo "gem: --no-document" >> ~/.gemrc
 brew install rbenv ruby-build
-echo '# for rbenv
+echo '
+# for rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
 source ~/.bash_profile
 rbenv install $(rbenv install -l | grep -v - | tail -1)
