@@ -154,7 +154,9 @@ alias activatetf='source ~/tensorflow/bin/activate'
 export JAVA_HOME=\$(/usr/libexec/java_home)
 
 # lazy-check your ip
-alias myip='curl ipinfo.io'" > ~/.bash_profile
+alias myip='curl ipinfo.io'
+# lazy ping check
+alias gping='ping www.google.com'" > ~/.bash_profile
 
 #####################################
 # Set up Homebrew

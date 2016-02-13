@@ -62,7 +62,9 @@ alias gpull='git pull'
 alias activatetf='source ~/tensorflow/bin/activate'
 
 # lazy-check your ip
-alias myip='curl ipinfo.io'" >> ~/.bashrc
+alias myip='curl ipinfo.io'
+# lazy ping check
+alias gping='ping www.google.com'" >> ~/.bashrc
 
 
 # Update first before install
