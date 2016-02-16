@@ -69,7 +69,7 @@ alias gping='ping www.google.com'" >> ~/.bashrc
 
 # Update first before install
 sudo apt-get update 
-sudo apt-get install ruby
+sudo apt-get -y install ruby
 
 
 #####################################
@@ -95,16 +95,16 @@ sudo apt-get update
 #####################################
 # Install common apps
 #####################################
-sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
-sudo apt-get install git
-sudo apt-get install google-chrome-stable
-sudo apt-get install sublime-text-installer
-sudo apt-get install screen
+sudo apt-get -y install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+sudo apt-get -y install git
+sudo apt-get -y install google-chrome-stable
+sudo apt-get -y install sublime-text-installer
+sudo apt-get -y install screen
 
 # install java
 echo "
 => Ensuring you have JDK 1.7 to run neo4j"
-java -version || sudo apt-get install default-jdk
+java -version || sudo apt-get -y install default-jdk
 
 # write JAVA_HOME path if not exists
 if [ "$JAVA_HOME" == "" ]; 
@@ -118,7 +118,7 @@ fi
 #####################################
 # Install Python and pip apps
 #####################################
-sudo apt-get install python3-pip python-dev
+sudo apt-get -y install python3-pip python-dev
 sudo pip3 install --upgrade setuptools
 sudo pip3 install --upgrade virtualenvwrapper
 mkdir ~/.virtualenvs
@@ -137,8 +137,8 @@ sudo pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/
 # Install Node.js and npm apps
 #####################################
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo apt-get install npm
+sudo apt-get -y install -y nodejs
+sudo apt-get -y install npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm update npm -g
 # gulp for streaming build, forever for keep-alive
@@ -149,7 +149,7 @@ sudo npm i -g gulp forever
 #####################################
 # Install Neo4j
 #####################################
-sudo apt-get install neo4j;
+sudo apt-get -y install neo4j;
 echo "
 # neo4j {start | stop | status | info}
 alias neo4j='service neo4j-service'
@@ -165,7 +165,7 @@ curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip ne
 #####################################
 # Install Postgresql 9.5: 
 #####################################
-sudo apt-get install postgresql postgresql-contrib
+sudo apt-get -y install postgresql postgresql-contrib
 
 
 
@@ -187,7 +187,7 @@ source ~/.bashrc
 
 rbenv install --verbose $(rbenv install -l | grep -v - | tail -1)
 rbenv global --verbose $(rbenv install -l | grep -v - | tail -1)
-sudo apt-get install ruby-dev make
+sudo apt-get -y install ruby-dev make
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler
 gem install rails
