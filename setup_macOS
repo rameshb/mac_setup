@@ -156,7 +156,9 @@ export JAVA_HOME=\$(/usr/libexec/java_home)
 # lazy-check your ip
 alias myip='curl ipinfo.io'
 # lazy ping check
-alias gping='ping www.google.com'" > ~/.bash_profile
+alias gping='ping www.google.com'
+# check listening port
+alias listenport='netstat -atp tcp | grep -i \"listen\"'" > ~/.bash_profile
 
 #####################################
 # Set up Homebrew
