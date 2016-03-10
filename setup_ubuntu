@@ -131,7 +131,7 @@ VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
 source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
 sudo pip3 install --upgrade thefuck glances speedtest-cli
 # tensorflow
-sudo pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.6.0-cp34-none-linux_x86_64.whl
+sudo pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
 
 
 
