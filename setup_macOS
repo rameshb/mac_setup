@@ -224,8 +224,8 @@ open -a 1Password\ 6
 # both version 2.x and 3.x
 brew install python3
 # update the shitty pip
-pip3 install --upgrade setuptools
-pip3 install --upgrade virtualenvwrapper
+pip3 install -U setuptools
+pip3 install -U virtualenvwrapper
 mkdir ~/.virtualenvs
 echo "
 # python3 virtualenvwrapper
@@ -233,9 +233,14 @@ export WORKON_HOME=~/.virtualenvs
 VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
 source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bash_profile
 pip3 install thefuck glances speedtest-cli
-# tensorflow
-sudo easy_install --upgrade six
-sudo pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.1-cp35-none-any.whl
+# tensorflow and skflow
+sudo pip3 install -U six
+sudo pip3 install -U https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.1-cp35-none-any.whl
+sudo pip3 install -U scikit-learn
+sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
+sudo pip3 install -U pandas
+sudo pip3 install -U matplotlib
+
 
 #####################################
 # Install Node.js and npm apps
