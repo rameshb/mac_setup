@@ -233,8 +233,19 @@ export WORKON_HOME=~/.virtualenvs
 VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
 source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bash_profile
 pip3 install thefuck glances speedtest-cli
+
+# Machine Learning stuff
+# install BLAS for gensim before numpy to speed up by an order
+git clone https://github.com/xianyi/OpenBLAS.git
+cd OpenBLAS
+make
+cd
+rm -rf OpenBLAS
+sudo pip3 install -U gensim
+# textblob for nlp
+sudo pip3 install -U textblob
+sudo python3 -m textblob.download_corpora
 # tensorflow and skflow
-sudo pip3 install -U six
 sudo pip3 install -U https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.1-cp35-none-any.whl
 sudo pip3 install -U scikit-learn
 sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
