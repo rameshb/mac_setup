@@ -114,6 +114,10 @@ if [ "$JAVA_HOME" == "" ];
 # For neo4j to use JVM
 export JAVA_HOME=$jdkpath" >> ~/.bashrc;
 fi
+# Maven
+sudo add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+sudo apt-get update
+sudo apt-get -y install maven3
 
 
 
