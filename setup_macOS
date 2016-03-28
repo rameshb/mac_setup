@@ -247,6 +247,8 @@ sudo pip3 install -U gensim
 sudo pip3 install -U textblob
 sudo python3 -m textblob.download_corpora
 # tensorflow and skflow
+sudo pip3 install -U numpy
+sudo pip3 install -U scipy
 sudo pip3 install -U https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.1-cp35-none-any.whl
 sudo pip3 install -U scikit-learn
 sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
