@@ -242,18 +242,14 @@ cd OpenBLAS
 make
 cd
 rm -rf OpenBLAS
-sudo pip3 install -U gensim
-# textblob for nlp
-sudo pip3 install -U textblob
-sudo python3 -m textblob.download_corpora
 # tensorflow and skflow
-sudo pip3 install -U numpy
-sudo pip3 install -U scipy
-sudo pip3 install -U https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.1-cp35-none-any.whl
-sudo pip3 install -U scikit-learn
-sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
-sudo pip3 install -U pandas
-sudo pip3 install -U matplotlib
+# sudo pip3 install -U numpy
+# sudo pip3 install -U scipy
+# sudo pip3 install -U https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.1-cp35-none-any.whl
+# sudo pip3 install -U scikit-learn
+# sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
+# sudo pip3 install -U pandas
+# sudo pip3 install -U matplotlib
 
 
 #####################################
@@ -294,17 +290,18 @@ initdb /usr/local/var/postgres -E utf8
 #####################################
 # Setup Amazon EC2 CLI
 #####################################
-curl -O http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
-sudo mkdir /usr/local/ec2
-sudo unzip ec2-api-tools.zip -d /usr/local/ec2
-export EC2_HOME=/usr/local/ec2/$(ls /usr/local/ec2)
-export PATH=$PATH:$EC2_HOME/bin
+# curl -O http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
+# sudo mkdir /usr/local/ec2
+# sudo unzip ec2-api-tools.zip -d /usr/local/ec2
+# export EC2_HOME=/usr/local/ec2/$(ls /usr/local/ec2)
+# export PATH=$PATH:$EC2_HOME/bin
 
 # Then manually export your EC2 instance cred
 # more ref here http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/set-up-ec2-cli-linux.html#setting_up_ec2_command_linux
 # export AWS_ACCESS_KEY=your-aws-access-key-id 
 # export AWS_SECRET_KEY=your-aws-secret-key
 
+# rm -rf mac_setup master.zip ec2-api-tools.zip
 
 
 #####################################
@@ -351,8 +348,6 @@ gem install travis
 #####################################
 
 brew doctor
-
-rm -rf mac_setup master.zip ec2-api-tools.zip
 
 echo "
 ================================================
