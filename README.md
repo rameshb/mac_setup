@@ -4,6 +4,8 @@ Setup for new machines, MacOS or Ubuntu, in case of an EMP attack. Installs: sys
 
 ## Instructions
 
+**Tips**: use `screen` during long installation.
+
 ### Ubuntu
 ```shell
 cd && sudo apt-get install zip unzip && curl -LOk https://github.com/kengz/mac_setup/archive/master.zip && unzip master.zip && mv mac_setup-master mac_setup && bash mac_setup/setup
