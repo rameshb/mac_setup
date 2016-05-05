@@ -205,7 +205,7 @@ brew cask install slack
 brew cask install spotify
 brew cask install shiftit
 brew cask install java
-brew install maven
+# brew install maven
 
 # download the vpn configs for tunnelblick
 curl -o ~/Downloads/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip
