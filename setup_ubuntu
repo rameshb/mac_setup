@@ -81,7 +81,7 @@ sudo apt-get -y install ruby
 # wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 # sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 # ST3
-sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+# sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 # jdk 8
 sudo add-apt-repository -y ppa:openjdk-r/ppa
 # neo4j
@@ -101,8 +101,7 @@ sudo apt-get update
 sudo apt-get -y install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev libatlas-dev libatlas3gf-base
 sudo apt-get -y install git
 # sudo apt-get -y install google-chrome-stable
-sudo apt-get -y install sublime-text-installer
-sudo apt-get -y install screen
+# sudo apt-get -y install sublime-text-installer
 
 # install java
 echo "
@@ -151,7 +150,7 @@ sudo apt-get -y install gfortran
 sudo apt-get -y install python3-numpy
 sudo apt-get -y install python3-scipy
 # sudo pip3 install -U https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
-# sudo pip3 install -U scikit-learn
+# sudo apt-get -y install python-sklearn
 # sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
 # sudo pip3 install -U pandas
 # sudo apt-get -y install python-matplotlib
