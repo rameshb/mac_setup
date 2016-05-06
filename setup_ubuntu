@@ -174,6 +174,7 @@ sudo npm i -g gulp forever
 # Install Neo4j
 #####################################
 sudo apt-get -y install neo4j;
+source ~/.bashrc
 echo "
 # Neo4j home path
 export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc

@@ -266,6 +266,7 @@ npm i -g gulp forever
 # Install Neo4j
 #####################################
 brew install neo4j
+source ~/.bash_profile
 echo "
 # Neo4j home path
 export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
