@@ -257,7 +257,7 @@ sudo pip3 install -U https://storage.googleapis.com/tensorflow/mac/tensorflow-0.
 brew install node
 npm update npm -g
 # gulp for streaming build, forever for keep-alive
-npm i -g gulp forever
+npm i -g gulp forever ngrok istanbul
 
 
 

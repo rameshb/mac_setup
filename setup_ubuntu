@@ -164,7 +164,7 @@ sudo apt-get -y install npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm update npm -g
 # gulp for streaming build, forever for keep-alive
-sudo npm i -g gulp forever
+sudo npm i -g gulp forever ngrok istanbul
 
 
 
