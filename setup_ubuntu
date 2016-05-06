@@ -122,6 +122,28 @@ fi
 
 
 #####################################
+# Install Neo4j
+#####################################
+sudo apt-get -y install neo4j;
+source ~/.bashrc
+echo "
+# Neo4j home path
+export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc
+source ~/.bashrc
+# Install the shell tool for import export
+curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip
+# auto reset pswd to 0000 from neo4j for direct use
+curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
+
+
+#####################################
+# Install Postgresql 9.5: 
+#####################################
+sudo apt-get -y install postgresql postgresql-contrib
+
+
+
+#####################################
 # Install Python and pip apps
 #####################################
 sudo apt-get -y install python3-pip python3-dev python3-setuptools
@@ -165,26 +187,6 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm update npm -g
 # gulp for streaming build, forever for keep-alive
 sudo npm i -g gulp forever ngrok istanbul
-
-
-
-#####################################
-# Install Neo4j
-#####################################
-sudo apt-get -y install neo4j;
-source ~/.bashrc
-echo "
-# Neo4j home path
-export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc
-source ~/.bashrc
-# Install the shell tool for import export
-curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip
-
-
-#####################################
-# Install Postgresql 9.5: 
-#####################################
-sudo apt-get -y install postgresql postgresql-contrib
 
 
 

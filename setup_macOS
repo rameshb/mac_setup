@@ -207,6 +207,35 @@ brew cask install shiftit
 brew cask install java
 # brew install maven
 
+
+#####################################
+# Install Neo4j
+#####################################
+brew install neo4j
+source ~/.bash_profile
+echo "
+# Neo4j home path
+export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
+source ~/.bash_profile
+# Install the shell tool for import export
+curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip
+# auto reset pswd to 0000 from neo4j for direct use
+curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
+
+
+#####################################
+# Install Postgresql 9.5: 
+# !Takes a long time
+# when 9.5 is out of beta, just do brew install postgresql
+#####################################
+# set permission, install, link, init
+chown -R $(whoami) /usr/local
+brew tap petere/postgresql
+brew install petere/postgresql/postgresql-9.5
+brew link -f postgresql-9.5
+initdb /usr/local/var/postgres -E utf8
+
+
 # download the vpn configs for tunnelblick
 curl -o ~/Downloads/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip
 unzip ~/Downloads/openvpn.zip -d ~/Downloads/openvpn/
@@ -258,33 +287,6 @@ brew install node
 npm update npm -g
 # gulp for streaming build, forever for keep-alive
 npm i -g gulp forever ngrok istanbul
-
-
-
-#####################################
-# Install Neo4j
-#####################################
-brew install neo4j
-source ~/.bash_profile
-echo "
-# Neo4j home path
-export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
-source ~/.bash_profile
-# Install the shell tool for import export
-curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip
-
-
-#####################################
-# Install Postgresql 9.5: 
-# !Takes a long time
-# when 9.5 is out of beta, just do brew install postgresql
-#####################################
-# set permission, install, link, init
-chown -R $(whoami) /usr/local
-brew tap petere/postgresql
-brew install petere/postgresql/postgresql-9.5
-brew link -f postgresql-9.5
-initdb /usr/local/var/postgres -E utf8
 
 
 #####################################
