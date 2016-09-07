@@ -206,7 +206,7 @@ brew cask install slack
 brew cask install spotify
 brew cask install shiftit
 brew cask install java
-# brew install maven
+brew cask install dockertoolbox
 
 
 # #####################################
@@ -343,6 +343,14 @@ rbenv rehash
 # install travis for encryption
 gem install travis
 
+
+#####################################
+# Create default docker machine
+#####################################
+# create the docker machine. Note that 'default' is the vm name we will be using
+docker-machine create --driver virtualbox default
+# allocate resource for the docker machine when stopped
+VBoxManage modifyvm default --cpus 2 --memory 4096
 
 
 #####################################
