@@ -174,7 +174,7 @@ sudo apt-get -y install python3-scipy
 sudo pip3 install -U scikit-learn
 sudo pip3 install -U pandas
 sudo apt-get -y install python-matplotlib
-sudo pip3 install -U https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp34-cp34m-linux_x86_64.whl
+# sudo pip3 install -U https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp34-cp34m-linux_x86_64.whl
 
 
 #####################################
