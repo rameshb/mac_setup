@@ -175,6 +175,8 @@ Hit return (Okay) when prompted to install command line tool
 # Installs homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# fix permission in new OSX
+sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/local
 
 # upgrade and check
 brew update && brew upgrade
@@ -193,20 +195,19 @@ brew tap caskroom/fonts
 #####################################
 # Install common apps
 #####################################
-# Installs cask, really vital
-brew install caskroom/cask/brew-cask
 
 # Install the basic apps for work
 brew cask install google-chrome
 brew cask install 1password
 brew cask install tunnelblick
-brew cask install sublime-text3
-brew cask install font-source-code-pro
+brew cask install sublime-text
 brew cask install slack
 brew cask install spotify
 brew cask install shiftit
 brew cask install java
-brew cask install dockertoolbox
+brew cask install docker
+brew cask install docker-toolbox
+brew cask install font-source-code-pro
 
 
 # #####################################
@@ -255,15 +256,15 @@ open -a 1Password\ 6
 # both version 2.x and 3.x
 brew install python3
 # update the shitty pip
-pip3 install -U setuptools
-pip3 install -U virtualenvwrapper
+sudo pip3 install -U setuptools
+sudo pip3 install -U virtualenvwrapper
 mkdir ~/.virtualenvs
 echo "
 # python3 virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
-VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
+VIRTUALENVWRAPPER_PYTHON='/usr/local/bin/python3'
 source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bash_profile
-pip3 install thefuck glances speedtest-cli
+sudo pip3 install thefuck glances speedtest-cli
 
 # Machine Learning stuff
 # install BLAS for gensim before numpy to speed up by an order
@@ -334,8 +335,8 @@ echo '
 # for rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
 source ~/.bash_profile
-rbenv install --verbose $(rbenv install -l | grep -v - | tail -1)
-rbenv global --verbose $(rbenv install -l | grep -v - | tail -1)
+rbenv install $(rbenv install -l | grep -v - | tail -1)
+rbenv global $(rbenv install -l | grep -v - | tail -1)
 gem install bundler
 gem install rails
 rbenv rehash
