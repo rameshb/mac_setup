@@ -291,23 +291,6 @@ npm i -g gulp forever ngrok istanbul
 
 
 #####################################
-# Setup Amazon EC2 CLI
-#####################################
-# curl -O http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
-# sudo mkdir /usr/local/ec2
-# sudo unzip ec2-api-tools.zip -d /usr/local/ec2
-# export EC2_HOME=/usr/local/ec2/$(ls /usr/local/ec2)
-# export PATH=$PATH:$EC2_HOME/bin
-
-# Then manually export your EC2 instance cred
-# more ref here http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/set-up-ec2-cli-linux.html#setting_up_ec2_command_linux
-# export AWS_ACCESS_KEY=your-aws-access-key-id 
-# export AWS_SECRET_KEY=your-aws-secret-key
-
-# rm -rf mac_setup master.zip ec2-api-tools.zip
-
-
-#####################################
 # Restoring custom Sublime config
 #####################################
 echo "
@@ -359,6 +342,8 @@ VBoxManage modifyvm default --cpus 2 --memory 4096
 #####################################
 
 brew doctor
+rm -rf master.zip
+
 
 echo "
 ================================================
