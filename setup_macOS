@@ -142,11 +142,17 @@ alias fuck='eval \$(thefuck \$(fc -ln -1)); history -r'
 alias FUCK='fuck'
  
 # git
-alias gstat='git status'
-alias gadd='git add -A; git commit -m'
-alias gpush='git push'
 alias gpull='git pull'
-alias gdiff='git diff' 
+alias gdiff='git diff'
+alias gcheck='git checkout'
+alias gadd='git add'
+alias gcom='git commit -m'
+alias gac='git add -A; git commit -m'
+alias gstat='git status'
+alias gpush='git push'
+alias glog='git log'
+alias gbra='git branch'
+alias gdelorigin='git push origin --delete'
 
 # For neo4j to use JVM 1.8
 export JAVA_HOME=\$(/usr/libexec/java_home)
